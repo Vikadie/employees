@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'employees.employees_app',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +124,30 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    # 'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG', # показва всичко и грешки и warnings и т.н.
+            'filters': [],
+            'class': 'logging.StreamHandler',  # искаме да използваме stream от конзолата
+        },
+    },
+    # 'root': {
+    #     'handlers': ['console'],
+    #     'level': 'WARNING',
+    # },
+    'loggers': {
+        'django.db.backends':{
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        },
+        # 'django': {
+        #     'handlers': ['console'],
+        #     'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        #     'propagate': False,
+        # },
+    },
+}
