@@ -1,14 +1,15 @@
 from django.db import models
-
+from django.urls import reverse
 
 # Create your models here.
 
+
 class AuditEntity(models.Model):
     created_on = models.DateTimeField(
-        auto_now_add=True,
+        auto_now_add=True,  # при създаването
     )
     updated_on = models.DateTimeField(
-        auto_now=True,
+        auto_now=True,  # при всяка промяна
     )
 
     # не може директно да се онаследят, за да ги има в другите класове -
@@ -23,8 +24,16 @@ class Department(AuditEntity):
         max_length=20,
     )
 
+    def get_absolute_url(self):
+        return reverse('department search', kwargs={
+            'id': self.id
+        })
 
-class Employee(models.Model):
+    def __str__(self):
+        return self.name
+
+
+class Employee(AuditEntity):
     SOFTWARE_DEVELOPER = 1
     QA_ENGINEER = 2
     DEVOPS_SPECIALIST = 3
@@ -54,9 +63,9 @@ class Employee(models.Model):
     )
     job_title = models.IntegerField(
         choices=(
-            (SOFTWARE_DEVELOPER, 'Software Developer'),  # (стойност в базата, как изглежда там)
-            (QA_ENGINEER, 'QA Eng'),
-            (DEVOPS_SPECIALIST, 'DevOps Specialist'),
+            ((SOFTWARE_DEVELOPER, 'Software Developer'),  # (стойност в базата, как изглежда там)
+             (QA_ENGINEER, 'QA Eng'),
+             (DEVOPS_SPECIALIST, 'DevOps Specialist'),)
         )
     )
 
@@ -75,7 +84,8 @@ class Employee(models.Model):
         ordering = ('company', '-first_name',)
         # - прави DESC
 
-
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 
 
 class Project(models.Model):

@@ -21,9 +21,10 @@ from employees.employees_app.views import home, department_details, list_departm
 # Mandatory, tuple or list
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
+    path('', home, name="go to home"),
     # path('department/2/', department_details),
     # path('department/', list_departments),
 
-    path('department/', include('employees.employees_app.urls')),
+    path('departments/', include('employees.employees_app.urls')),
+    path('template_examples/', include('employees.template_examples.urls'))
 ]
