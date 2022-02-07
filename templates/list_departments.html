@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% block content1 %}
+<h1>Departments list</h1>
+<ul>
+    {% for dept in departments %}
+        <li>{{ dept.name }}</li>
+        <ul>
+            {% for e in dept.employee_set.all %}
+                <li>{{ e }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul>
+
+<hr>
+<ul>
+    {% for emp in employees %}
+        <li>{{ emp.first_name }} ({{ emp.department.name }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

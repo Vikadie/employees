@@ -1,0 +1,11 @@
+h1{
+    color: #009900;
+}
+
+nav ul{
+    display: flex;
+}
+
+nav li {
+    margin-outside: 10px;
+}

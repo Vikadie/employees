@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load my_filters %}  {# custom filter loading #}
+{% load my_tags %}  {# custom tag loading #}
+
+{% block content1 %}
+    <h1>{{ title }}</h1>
+    <ul>
+        {% for employee in employees %}
+            {% ifchanged employee.company %}
+                -----------
+            {% endifchanged %}
+            <li>{{ employee|upper }} - <i>{{ employee.get_job_title_display }} @ {{ employee.department.name }}</i> /
+                (<strong>{{ employee.company }}</strong>)
+            </li>
+{#            <li>{% with employee as object %}{% get_verbose_name object.job_title %}{% endwith %}</li>#}
+{#            <li>{% get_verbose_name employee 'job_title' %}</li>#}
+            <li>{{ employee|trunc5 }}</li>  {# custom filter application #}
+        {% endfor %}
+    </ul>
+    {% get_departments %}  {# custom tag #}
+{% endblock %}

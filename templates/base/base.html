@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+<h1>It works</h1>
+<p>The number is {{ number }}</p>
+<nav>
+    <ul>
+        <li><a href={% url 'go to home' %}>Go to Home</a></li>
+        <li><a href={% url 'departments list' %}>Go to department's list</a></li>
+        <li><a href={% url 'template examples' %}>Go to Templates</a></li>
+    </ul>
+</nav>
+{% block content1 %}
+{% endblock %}
+</body>
+</html>
